@@ -1,5 +1,5 @@
 {
-	"name": "Accounts",
+	"name": "AccountsSource",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "OnPremFiles",
