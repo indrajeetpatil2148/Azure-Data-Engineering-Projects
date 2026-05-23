@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "azure-indra-adf"
+		},
+		"AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"OnPremFiles_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://azureindrastorage.dfs.core.windows.net/"
+		},
+		"OnPremFiles_properties_typeProperties_host": {
+			"value": "C:\\Users\\Admin\\Desktop\\Azure Project\\CRM Sales Opportunity"
+		},
+		"OnPremFiles_properties_typeProperties_userId": {
+			"value": "Admin"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
