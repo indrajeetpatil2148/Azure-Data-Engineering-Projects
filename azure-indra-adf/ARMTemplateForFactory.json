@@ -365,6 +365,64 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Success",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Sales_Teams",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {},
+							"url": "https://prod-12.westus2.logic.azure.com:443/workflows/0ba37ace8a0c440eb9eebb4d8a4d42dd/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=na4r34CbxtoGEQLa7vglNSfqeRruNjvwRkzeLHkIlx4",
+							"body": {
+								"value": "{\n    \"pipelinename\":\"@{pipeline().Pipeline}\",\n    \"status\":\"succeeded\"\n    \"runid\":\"@{pipeline().RunId}\",\n    \"time\":\"@{utcNow()}\"\n    \n}",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Fail",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Sales_Teams",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {},
+							"url": "https://prod-12.westus2.logic.azure.com:443/workflows/0ba37ace8a0c440eb9eebb4d8a4d42dd/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=na4r34CbxtoGEQLa7vglNSfqeRruNjvwRkzeLHkIlx4",
+							"body": {
+								"value": "{\n    \"pipelinename\":\"@{pipeline().Pipeline}\",\n    \"status\":\"Failed\"\n    \"runid\":\"@{pipeline().RunId}\",\n    \"time\":\"@{utcNow()}\"\n    \n}",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -678,6 +736,36 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "OnPremtoCloud",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 15,
+						"startTime": "2026-05-24T15:41:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/OnPremtoCloud')]"
+			]
 		}
 	]
 }
