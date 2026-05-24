@@ -1,0 +1,15 @@
+{
+	"name": "azure-indra-adf",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bafdc85a-dc8d-4360-a2fc-e37d063514c1",
+		"tenantId": "5f0bb8ac-9da0-402d-a8f8-d4d5467402cf"
+	}
+}
